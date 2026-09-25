@@ -298,6 +298,59 @@
             text-decoration: underline;
         }
 
+        /* Blog Preview */
+        .blog-preview {
+            padding: 6rem 2rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .blog-card {
+            display: block;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .blog-card-tag {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .blog-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .blog-view-all {
+            text-align: center;
+        }
+
         /* CTA Section */
         .cta {
             padding: 6rem 2rem;
@@ -385,7 +438,7 @@
                 padding: 8rem 1.5rem 4rem;
             }
 
-            .services, .projects, .cta {
+            .services, .projects, .blog-preview, .cta {
                 padding: 4rem 1.5rem;
             }
 
@@ -413,8 +466,9 @@
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
                 <li><a href="solutions.html">Solutions</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <button class="mobile-menu-btn" aria-label="Menu">
@@ -514,6 +568,27 @@
                     <p>Bespoke mobile applications built from the ground up to meet specific client requirements, from concept to deployment and beyond.</p>
                     <a href="solutions.html" class="project-link">Learn more →</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest from the Blog -->
+    <section class="blog-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2>From the Blog</h2>
+                <p>Thoughts, guides, and updates from the SSManha team</p>
+            </div>
+            <div class="blog-grid">
+                <a href="blog-video-silence-remover.html" class="blog-card">
+                    <span class="blog-card-tag">Video Editing</span>
+                    <h3>Why Your Videos Still Sound Amateur (Even With Good Content)</h3>
+                    <p>Silent gaps in raw footage make videos feel slow and unpolished — here's how on-device AI removes them automatically.</p>
+                    <span class="project-link">Read post →</span>
+                </a>
+            </div>
+            <div class="blog-view-all">
+                <a href="blog.html" class="btn btn-secondary">View All Posts</a>
             </div>
         </div>
     </section>

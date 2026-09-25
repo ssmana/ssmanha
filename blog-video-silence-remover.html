@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Your Videos Still Sound Amateur (Even With Good Content) - SSManha Ltd</title>
+    <meta name="description" content="Silent gaps in raw footage make videos feel slow and unpolished. Here's how on-device AI can remove them automatically — free, private, no manual editing.">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        /* CSS Reset & Base Styles */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a25;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent);
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 10rem 2rem 3rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .page-header .eyebrow {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2rem, 5vw, 2.75rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            max-width: 780px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-header .meta {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        /* Article */
+        .article-section {
+            padding: 3rem 2rem 5rem;
+        }
+
+        .article {
+            max-width: 720px;
+            margin: 0 auto;
+            font-size: 1.0625rem;
+        }
+
+        .article p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.85;
+        }
+
+        .article h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .article ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .article ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .article ul li svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .article strong {
+            color: var(--text-primary);
+        }
+
+        /* CTA card inside article */
+        .inline-cta {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .inline-cta-text h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .inline-cta-text p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-bottom: 0;
+        }
+
+        /* Bottom CTA Section */
+        .cta {
+            padding: 5rem 2rem;
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-left span {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-right a {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer-right a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header {
+                padding: 8rem 1.5rem 2.5rem;
+            }
+
+            .article-section {
+                padding: 2.5rem 1.5rem 4rem;
+            }
+
+            .inline-cta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#3B82F6"/>
+                    <path d="M10 16L14 20L22 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                SSManha
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="eyebrow">Video Editing</div>
+            <h1>Why Your Videos Still Sound Amateur (Even With Good Content)</h1>
+            <p class="meta">SSManha Team · 5 min read</p>
+        </div>
+    </section>
+
+    <!-- Article -->
+    <section class="article-section">
+        <div class="article">
+            <p>If you've ever recorded a podcast, a tutorial, or a vlog, you know the problem: you talk, you pause to think, you say "um," you wait for someone to finish typing, you take a breath before the next sentence. None of that makes it into a good final video - but it's all sitting there in your raw footage, and cutting it out by hand is tedious.</p>
+
+            <h2>The silence problem</h2>
+            <p>Every unedited recording is full of dead air. A 20-minute podcast recording might have three or four minutes of pure silence scattered through it - gaps between thoughts, pauses while you check notes, moments where nothing is happening. Individually they're only a second or two. Collectively, they make your video feel slow, unprofessional, and harder to watch than it needs to be.</p>
+            <p>Most creators handle this one of two ways: they scrub through the whole timeline manually, zooming in on the waveform and cutting each gap by hand - which can take longer than recording the video in the first place - or they just leave it, and the video is a little worse for it.</p>
+
+            <h2>Why manual trimming doesn't scale</h2>
+            <p>The manual approach works, but it doesn't scale. A five-minute video might take fifteen minutes to clean up. A weekly podcast means doing this every single week. It's the kind of repetitive editing task that's perfect for automation - you're not making creative decisions, you're just looking for silence and removing it.</p>
+
+            <h2>Automating it with on-device AI</h2>
+            <p>This is the exact problem we built <a href="https://play.google.com/store/apps/details?id=com.ssmana.silenceremover" target="_blank" rel="noopener"><strong>Video Silence Remover</strong></a> to solve. You import a video, the app's on-device AI detects the silent segments automatically, you preview the result, and you export. No manual scrubbing, no waveform hunting.</p>
+
+            <p>A few things that mattered while building it:</p>
+            <ul>
+                <li>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span><strong>It runs on-device.</strong> Your video is never uploaded anywhere for processing - detection happens locally, so there's no waiting on a server and no privacy concern about raw footage leaving your phone.</span>
+                </li>
+                <li>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span><strong>No account needed.</strong> Install and use it immediately.</span>
+                </li>
+                <li>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span><strong>No ads.</strong> No distractions - the app is ad-free in both the free and paid versions.</span>
+                </li>
+                <li>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span><strong>Free to use.</strong> Unlimited processing at low-resolution export; subscription unlocks higher-resolution export if you need it for final delivery.</span>
+                </li>
+            </ul>
+
+            <div class="inline-cta">
+                <div class="inline-cta-text">
+                    <h3>Video Silence Remover</h3>
+                    <p>Free on Google Play · On-device AI · No account needed</p>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.ssmana.silenceremover" class="btn btn-primary" target="_blank" rel="noopener">Get it on Google Play</a>
+            </div>
+
+            <h2>Who it's for</h2>
+            <p>If you're a podcaster or YouTuber trimming raw footage, a vlogger cutting awkward pauses, or just someone who wants tighter, more watchable videos without spending your evening in a timeline - this is built for exactly that.</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to cut the dead air?</h2>
+            <p>Try Video Silence Remover free on Google Play - no account, no upload, no hidden fees.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.ssmana.silenceremover" class="btn btn-primary" target="_blank" rel="noopener">Get it on Google Play</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#3B82F6"/>
+                    <path d="M10 16L14 20L22 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>© 2026 SSManha Ltd. All rights reserved.</span>
+            </div>
+            <div class="footer-right">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
